@@ -25,9 +25,13 @@ def main():
                 review = {'score': data['stars'], 'text': data['text']}
                 REVIEWS[data['business_id']]['reviews'].append(review)
 
-    # write to output file
-    with open('reviews.json', 'w') as f:
-        json.dump(REVIEWS, f)
+    # write to output files
+    print 'Dumping to files...'
+    for key, value in REVIEWS.iteritems():
+        with open(key + ".json", 'w') as f:
+            json.dump(value, f)
+            print 'File dumped ' + key
+
 
 if __name__ == "__main__":
     main()
