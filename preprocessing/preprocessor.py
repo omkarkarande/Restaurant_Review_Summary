@@ -1,5 +1,6 @@
 import sys
 import json
+import os
 
 REVIEWS = {}
 
@@ -15,7 +16,7 @@ def main():
         for line in f:
             data = json.loads(line)
             if 'Restaurants' in data['categories']:
-                REVIEWS[data['business_id']] = {'name': data['name'], 'reviews': []}
+                REVIEWS[data['business_id']] = {'name': data['name'], 'lat': data['latitude'], 'long': data['longitude'], 'reviews': []}
 
     # read reviews
     with open(sys.argv[1] + '/yelp_academic_dataset_review.json') as f:
@@ -27,8 +28,10 @@ def main():
 
     # write to output files
     print 'Dumping to files...'
+    directory_reviews = os.path.dirname('reviews/')
+    os.makedirs(directory_reviews)
     for key, value in REVIEWS.iteritems():
-        with open(key + ".json", 'w') as f:
+        with open('reviews/' + key + ".json", 'w') as f:
             json.dump(value, f)
             print 'File dumped ' + key
 
