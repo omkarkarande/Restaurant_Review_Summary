@@ -1,0 +1,14 @@
+FOOD:
+food, menu, lunch, dinner, bar, cheese, drinks, dessert, breakfast, chicken, meal, fires, rice, wine, flavor, meat, bacon, side, sushi, pizza, course, sauce, chips, shrimp, water, salsa, beer, bread, eggs, coffee, dish, beef, burger, fish, brunch, beans, onions, soup, appetizer(s), steak, pork, buffet, taste, bite, mushroom, mouth, crispy, salt, veggies, butter, sandwich, lettuce, seafood, potatoes, sausage, garlic, pasta, tomato, amount, plate, tacos, toppings, vegetables, tender, noodles, lobster, ice cream, guacamole, avocado, waffles, crust, entrees, gravy, chocolate, pancakes, ribs, fruit, alcohol, tofu, toast, cocktails, broth, leftovers, scallops, hummus, broccoli, asparagus, mayo, oysters, carrots, olives, ketchup, wings, sashimi, pepperoni, tuna, mussels, brisket, calamari, starters, soda, dressing, ranch, beans, mozzarella, ramen
+
+AMBIENCE:
+place, people, table, area, location, atmosphere, ambience, patio, decor, seat, seating, parking, dining room, room, floor, presentation, interior, bed, entrance, chairs, space
+
+SERVICE:
+service, staff, server, waitress, waiter, order, experience, portions, hostess, chef, wait, line, bartender, mood, inside, owner, music, manager, delivery, bar area, minutes, time, cashier, management, takeout, presentation
+
+RESTAURANT:
+restaurant, kitchen, counter, reservations, experience 
+
+PRICE:
+price, prices, happy hour, bill, money, check, tip, amount, cash, tax
