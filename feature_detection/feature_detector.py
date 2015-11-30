@@ -17,11 +17,9 @@ REVIEW_DATA = {}
 
 def getType(sentence):
     TYPE = {'FOOD': 0, 'SERVICE': 0, 'AMBIENCE': 0, 'PRICE': 0}
-
     # tokenize the sentence
     tokens = nltk.word_tokenize(sentence)
     for token in tokens:
-        print token
         # check for the features
         if token in FOOD:
             TYPE['FOOD'] += 1
@@ -64,24 +62,29 @@ def main():
     # read the model to get tokens
     with open(sys.argv[1], 'r') as f:
 
-        FOOD = f.readline().strip(', ').split()
-        AMBIENCE = f.readline().strip(', ').split()
-        SERVICE = f.readline().strip(', ').split()
-        PRICE = f.readline().strip(', ').split()
+        FOOD = f.readline().strip().split(', ')
+        FOOD = [i.decode('UTF-8') for i in FOOD]
+        AMBIENCE = f.readline().strip().split(', ')
+        AMBIENCE = [i.decode('UTF-8') for i in AMBIENCE]
+        SERVICE = f.readline().strip().split(', ')
+        SERVICE = [i.decode('UTF-8') for i in SERVICE]
+        PRICE = f.readline().strip().split(', ')
+        PRICE = [i.decode('UTF-8') for i in PRICE]
 
     # read the sentiment files
     for root, _, files in os.walk(sys.argv[2]):
         # for every file
         for sentiment_file in files:
-            key = sentiment_file[:len(sentiment_file) - 50]
+            key = sentiment_file[:len(sentiment_file) - 5]
             if key not in REVIEW_DATA:
-                REVIEW_DATA[key] = {
-                    'FOOD': 0.0, 'SERVICE': 0.0, 'AMBIENCE': 0.0, 'PRICE': 0.0}
+                REVIEW_DATA[key] = {'FOOD': 0.0, 'SERVICE': 0.0, 'AMBIENCE': 0.0, 'PRICE': 0.0}
 
             # open the file and read the contents into a list
             with open(root + '/' + sentiment_file) as f:
                 sentences = eval(f.read())
-                # N = len(sentences)
+                N = len(sentences)
+                if N == 0:
+                    continue
                 # for each sentence detect what the reviewer is talking about
                 for item in sentences:
                     sentence_type = getType(item[1])
@@ -89,7 +92,13 @@ def main():
                         for feat_type in sentence_type:
                             REVIEW_DATA[key][feat_type] += item[0] / float(len(sentence_type))
 
-                print REVIEW_DATA
+                # normalize the data
+                print 'RESTAURANT ID: ' + key
+                for category, value in REVIEW_DATA[key].iteritems():
+                    REVIEW_DATA[key][category] = value / N
+                    print category + ": " + str(REVIEW_DATA[key][category])
+                print ''
+
     return
 
 if __name__ == "__main__":

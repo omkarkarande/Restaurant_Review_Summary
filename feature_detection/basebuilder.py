@@ -15,6 +15,7 @@ def main():
 
     for root, _, files in os.walk(sys.argv[1]):
         for feat_file in files:
+            print 'processing ' + feat_file
             with open(root + '/' + feat_file) as f:
                 for line in f:
                     item = eval(line)
