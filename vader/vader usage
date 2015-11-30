@@ -1,0 +1,25 @@
+
+--------------------
+
+
+
+
+Curl command to get the vader_lexicon.txt ---
+
+curl https://raw.githubusercontent.com/nltk/nltk/develop/nltk/sentiment/vader_lexicon.txt> vader_lexicon.txt
+
+sudo cp vader_lexicon.txt /usr/local/lib/python2.7/dist-packages/nltk/sentiment/
+
+
+
+import nltk.sentiment.vader
+from nltk.sentiment.vader import SentimentIntensityAnalyzer
+vader_analyzer = SentimentIntensityAnalyzer()
+vader_analyzer.polarity_scores('I am happy')
+
+-----------------
+
+pip install vaderSentiment
+
+from vaderSentiment.vaderSentiment import sentiment as vaderSentiment
+vs = vaderSentiment(sentence)
