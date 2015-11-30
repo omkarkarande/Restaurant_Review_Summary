@@ -64,10 +64,10 @@ def main():
     # read the model to get tokens
     with open(sys.argv[1], 'r') as f:
 
-        FOOD = f.readline().strip().split()
-        AMBIENCE = f.readline().strip().split()
-        SERVICE = f.readline().strip().split()
-        PRICE = f.readline().strip().split()
+        FOOD = f.readline().strip(', ').split()
+        AMBIENCE = f.readline().strip(', ').split()
+        SERVICE = f.readline().strip(', ').split()
+        PRICE = f.readline().strip(', ').split()
 
     # read the sentiment files
     for root, _, files in os.walk(sys.argv[2]):
