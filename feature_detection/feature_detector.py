@@ -9,6 +9,8 @@ AMBIENCE = []
 SERVICE = []
 PRICE = []
 
+# detection threshold
+THRESHOLD = 4.0
 # review dictionary
 REVIEW_DATA = {}
 
@@ -31,11 +33,25 @@ def getType(sentence):
             TYPE['PRICE'] += 1
 
     # sort the type based on frequency
-    sorted_types = sorted(TYPE.items(), key=operator.itemgetter(1))
+    sorted_types = sorted(TYPE.items(), key=operator.itemgetter(1), reverse=True)
     sentype = []
-    for item in sorted_types:
-        print item
-    return sentype
+
+    if sorted_types[0][1] == 0 and sorted_types[1][1] == 0 and sorted_types[2][1] == 0 and sorted_types[3][1] == 0:
+        return None
+    else:
+        # add first item to sorted type
+        sentype.append(sorted_types[0][0])
+        # add second item if it lies within THRESHOLD / 2 of first
+        if sorted_types[1][1] != 0 and sorted_types[0][1] - sorted_types[1][1] <= THRESHOLD / 2.0:
+            sentype.append(sorted_types[1][0])
+        # add second item if it lies within THRESHOLD / 3 of first
+        if sorted_types[2][1] != 0 and sorted_types[0][1] - sorted_types[2][1] <= THRESHOLD / 3.0:
+            sentype.append(sorted_types[2][0])
+        # add second item if it lies within THRESHOLD / 4 of first
+        if sorted_types[3][1] != 0 and sorted_types[0][1] - sorted_types[3][1] <= THRESHOLD / 4.0:
+            sentype.append(sorted_types[3][0])
+
+        return sentype
 
 
 def main():
@@ -65,11 +81,15 @@ def main():
             # open the file and read the contents into a list
             with open(root + '/' + sentiment_file) as f:
                 sentences = eval(f.read())
-                N = len(sentences)
+                # N = len(sentences)
                 # for each sentence detect what the reviewer is talking about
                 for item in sentences:
                     sentence_type = getType(item[1])
+                    if sentence_type is not None:
+                        for feat_type in sentence_type:
+                            REVIEW_DATA[key][feat_type] += item[0] / float(len(sentence_type))
 
+                print REVIEW_DATA
     return
 
 if __name__ == "__main__":
