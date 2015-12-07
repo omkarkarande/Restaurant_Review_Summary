@@ -46,6 +46,9 @@ def getMenu(filename):
 					if(content["type"]=="ITEM"):
 						foodlist.append(content["name"])
 	return foodlist
+if len(sys.argv) != 2:
+        print ('USAGE: python preprocessor.py <path to reviews folder>')
+        sys.exit(0)
 count=0
 directory_menus = os.path.dirname('menu/')
 if not os.path.isdir(directory_menus):

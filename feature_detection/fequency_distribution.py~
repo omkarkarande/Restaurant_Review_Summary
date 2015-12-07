@@ -5,7 +5,7 @@ import operator
 def main():
 
     if len(sys.argv) != 2:
-        print "USAGE: python frequency_distribution.py <path to features.py output file>"
+        print "USAGE: python frequency_distribution.py <path to features file>"
         sys.exit(0)
 
     distribution = {}

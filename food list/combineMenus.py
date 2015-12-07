@@ -1,5 +1,9 @@
 import os
+import sys
 from collections import Counter
+if len(sys.argv) != 2:
+        print ('USAGE: python preprocessor.py <path to menus folder>')
+        sys.exit(0)
 files=os.listdir(sys.argv[1])
 foodlist=[]
 for f in files:

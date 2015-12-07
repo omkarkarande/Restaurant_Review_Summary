@@ -10,7 +10,7 @@ PRICE = []
 
 def main():
     if len(sys.argv) != 2:
-        print "USAGE: python basebuilder.py <path to labels folder>"
+        print "USAGE: python basebuilder.py <path to feature files>"
         sys.exit(0)
 
     for root, _, files in os.walk(sys.argv[1]):
